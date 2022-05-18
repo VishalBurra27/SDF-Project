@@ -1,0 +1,136 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Inbuilt themes in beamer
+\documentclass{beamer}
+
+% Theme choice:
+\usetheme{CambridgeUS}
+
+% Title page details: 
+
+\usepackage{polynom}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{bm}
+\usepackage[misc]{ifsym}
+%\setlength{\columnseprule}{1pt}
+%\def\columnseprulecolor{\color{blue}}
+
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage[applemac]{inputenc}
+\usepackage{tikz}
+\usepackage{listings}
+    \usepackage{color}                                            %%
+    \usepackage{array}                                            %%
+    \usepackage{longtable}                                        %%
+    \usepackage{calc}                                             %%
+    \usepackage{multirow}                                         %%
+    \usepackage{hhline}                                           %%
+    \usepackage{ifthen}                                           %%
+  
+\usepackage{lscape}     
+\usepackage{tfrupee}
+\usepackage{parskip}
+
+\pagecolor{white}
+\DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator*{\pipe}{|}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}  
+\graphicspath{{./images/}}
+
+
+\begin{document}
+\newcommand{\bfr}[2]{\section{#1} \begin{frame}{#1} #2 \end{frame}}
+
+	\title{Project 2 : EMS}
+		\author{ Abhay Shankar K \\ Archit V. Ganvir \\ B. Vishal Mathews}
+
+	\begin{frame}
+    		\titlepage 
+	\end{frame}
+	
+	\begin{frame}
+		\tableofcontents
+	\end{frame}
+
+
+	\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+	\providecommand{\sbrak}[1]{\ensuremath{\left[#1\right]}}
+	\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+	\newcommand{\req}{\noindent \textbf{Required: }}
+	\providecommand{\rpr}[2]{\ensuremath{P_{#1}\left(#2\right)}} %random variable notation
+	\providecommand{\spr}[1]{\ensuremath{P\left(#1\right)}} %simple notation
+	\providecommand{\cpr}[2]{\ensuremath{\spr{#1 \pipe #2}}} %conditional probability
+
+	\bfr{Overview}{
+	
+		According to Wikipedia,
+		\begin{itemize}
+			\item Education management information systems (EMIS) aim to collect, integrate, process, maintain and disseminate data and information.
+			\item It must support decision-making, policy-analysis and formulation, planning, monitoring and management at all levels of an education system. 
+			\item It is a system of people, technology, models, methods, processes, procedures, rules, and regulations that function together.
+			\item It provides education leaders, decision-makers and managers at all levels with a comprehensive, integrated set of relevant, reliable, unambiguous and timely data and information to support them in completion of their responsibilities.
+		\end{itemize}
+		}	
+	
+	\bfr{Salient points}{
+	\begin{itemize}
+		\item An EMS must model the interaction between a set of students (in the mathematical sense) and a set of teachers. 
+		\item Each set must be able to exchange information in specific formats (e.g. Assignments, Recordings, Grading), on specific forums.
+		\item It must also allow for mutability of the aforementioned sets, and must acquire data effectively for new-joinees.
+		\item A username-password database is also necessary. 
+		\item The scholastic structure, with Faculty and Students organised into multiple schools and multiple branches per school, is optional. It may simply complicate matters.
+		\item Courses are classified by field, subfield, then complexity. Each Course has member Sessions, Assignments, and Tests. 
+	\end{itemize}
+	}
+	
+	
+	
+	\bfr{Use Cases}{
+	
+		\begin{block}{Faculty}
+		\begin{itemize}
+		\item Uploads video session.
+		\item Uploads assignment question.
+		\item Uploads test question paper and answer paper (separately).
+		\item Evaluate both Tests and Assignments.
+		\end{itemize}
+		\end{block}
+		
+		\begin{block}{Student}
+		\begin{itemize}
+		\item Watch video session.
+		\item Uploads answer to assignment.
+		\item Take tests.
+		\end{itemize}
+		\end{block}
+	}
+	
+	\bfr{Forums}{
+	
+	For this project, a forum is a platform that facilitates a specific type of interaction between Faculty and Student. Each corresponding pair of Use-cases will also correspond to a specific forum.
+	
+	Thus, there will be a single forum for the submission and evaluation of assignments, and a separate one for taking tests.
+		}
+		
+	
+	
+	
+	
+	
+	
+\end{document}
