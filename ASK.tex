@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Inbuilt themes in beamer
+\documentclass{beamer}
+
+% Theme choice:
+\usetheme{CambridgeUS}
+
+% Title page details: 
+\usepackage[parfill]{parskip}
+
+\pagecolor{white}
+\DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator*{\pipe}{|}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}  
+\graphicspath{{./images/}}
+
+
+\begin{document}
+\newcommand{\bfr}[2]{\section{#1} \begin{frame}{#1} #2 \end{frame}}
+
+	\title{Project 2 : EMS internals (?)}
+		\author{Abhay Shankar K}
+
+	\begin{frame}
+    		\titlepage 
+	\end{frame}
+	
+	\begin{frame}
+		\tableofcontents
+	\end{frame}
+
+
+	
+
+	\bfr{Overview}{
+		According to Wikipedia,
+		\begin{itemize}
+			\item Education management information systems (EMIS) aim to collect, integrate, process, maintain and disseminate data and information.
+			\item It must support decision-making, policy-analysis and formulation, planning, monitoring and management at all levels of an education system. 
+			\item It is a system of people, technology, models, methods, processes, procedures, rules, and regulations that function together.
+			\item It provides education leaders, decision-makers and managers at all levels with a comprehensive, integrated set of relevant, reliable, unambiguous and timely data and information to support them in completion of their responsibilities.
+		\end{itemize}
+		}	
+	
+	\bfr{Salient points}{
+	\begin{itemize}
+		\item An EMS must model the interaction between a set of students (in the mathematical sense) and a set of teachers. 
+		\item Each set must be able to exchange information in specific formats (e.g. Assignments, Recordings, Grading), on specific forums.
+		\item It must also allow for mutability of the aforementioned sets, and must acquire data effectively for new-joinees.
+		\item A username-password database is also necessary. 
+		\item The scholastic structure, with Faculty and Students organised into multiple schools and multiple branches per school, is optional. It may simply complicate matters.
+		\item Courses are classified by field, subfield, then complexity. Each Course has member Sessions, Assignments, and Tests. 
+	\end{itemize}
+	}
+	
+	
+	
+	\bfr{Use Cases}{
+	
+		\begin{block}{Faculty}
+		\begin{itemize}
+		\item Uploads video session.
+		\item Uploads assignment question.
+		\item Uploads test question paper and answer paper (separately).
+		\item Evaluate both Tests and Assignments.
+		\end{itemize}
+		\end{block}
+		
+		\begin{block}{Student}
+		\begin{itemize}
+		\item Watch video session.
+		\item Uploads answer to assignment.
+		\item Take tests.
+		\item Ask doubts.
+		\end{itemize}
+		\end{block}
+		
+			}
+	
+	\bfr{Forums}{
+	
+	For this project, a forum is a platform that facilitates a specific type of interaction between Faculty and Student. Each corresponding pair of Use-cases will also correspond to a specific forum.
+	
+	Thus, there will be a single forum for the submission and evaluation of assignments, and a separate one for taking tests. There will also be a forum for doubts/clarifications, with various parameters serving to categorize them for effective handling.
+	
+	A user can log in to a forum, and access/modify specific fields (grading, etc.) and can also upload/download data.
+		}
+		
+	\bfr{Possible Classes}{
+	
+	\begin{itemize}
+		
+		\item class Faculty
+		\item class Student
+		\item class Course
+		\item class Forum : Various forums will be subclasses.
+		\item class Assignment, class Test, class Session, etc. : Tentative.
+		
+	\end{itemize}
+	}	
+	
+	
+	
+	
+	
+\end{document}
