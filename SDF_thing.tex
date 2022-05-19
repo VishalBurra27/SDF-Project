@@ -116,18 +116,33 @@
 		\item Watch video session.
 		\item Uploads answer to assignment.
 		\item Take tests.
+		\item Ask doubts.
 		\end{itemize}
 		\end{block}
-	}
+		
+			}
 	
 	\bfr{Forums}{
 	
 	For this project, a forum is a platform that facilitates a specific type of interaction between Faculty and Student. Each corresponding pair of Use-cases will also correspond to a specific forum.
 	
-	Thus, there will be a single forum for the submission and evaluation of assignments, and a separate one for taking tests.
+	Thus, there will be a single forum for the submission and evaluation of assignments, and a separate one for taking tests. There will also be a forum for doubts/clarifications, with various parameters serving to categorize them for effective handling.
+	
+	A user can log in to a forum, and access/modify specific fields (grading, etc.) and can also upload/download data.
 		}
 		
+	\bfr{Possible Classes}{
 	
+	\begin{itemize}
+		
+		\item class Faculty
+		\item class Student
+		\item class Course
+		\item class Forum : Various forums will be subclasses.
+		\item class Assignment, class Test, class Session, etc. : Tentative.
+		
+	\end{itemize}
+	}	
 	
 	
 	
