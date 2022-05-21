@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Inbuilt themes in beamer
+\documentclass{beamer}
+
+% Theme choice:
+\usetheme{CambridgeUS}
+
+% Title page details: 
+\usepackage[parfill]{parskip}
+
+\pagecolor{white}
+\DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator*{\pipe}{|}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}  
+\graphicspath{{./images/}}
+
+
+\begin{document}
+\newcommand{\bfr}[2]{\section{#1} \begin{frame}{#1} #2 \end{frame}}
+
+	\title{Education Management System}
+		\author{Abhay Shankar K \\Archit V Ganvir \\B Vishal Mathews}
+
+	\begin{frame}
+    		\titlepage 
+	\end{frame}
+	
+	\begin{frame}
+		\tableofcontents
+	\end{frame}
+
+
+	
+
+\bfr{Overview}{
+	According to Wikipedia,
+	\begin{itemize}
+		\item Education management information systems (EMIS) aim to collect, integrate, process, maintain and disseminate data and information.
+		\item It must support decision-making, policy-analysis and formulation, planning, monitoring and management at all levels of an education system. 
+		\item It is a system of people, technology, models, methods, processes, procedures, rules, and regulations that function together.
+		\item It provides education leaders, decision-makers and managers at all levels with a comprehensive, integrated set of relevant, reliable, unambiguous and timely data and information to support them in completion of their responsibilities.
+	\end{itemize}
+		}
+		
+\bfr{What is an EMS?}{
+
+An EMS, or Education Management System, is a framework of people and machines that aim to streamline the process of education, primarily by optimizing accessibility and quality of content for students.
+
+\begin{itemize}
+	\item Some of the most popular Education Management Systems used in India are Byju's and Unacademy, and their working will be familiar to most students. 
+
+    	\item They offer vast amounts of comprehensive study material across all stages of education, from primary school to competitive national exams and olympiads.
+
+    	\item These also track the students' progress through various courses and tests, and provide a detailed analysis for the students to evaluate their strengths and weaknesses. These statistics are well represented so as to build an intuition of what progress looks like in students, using graphs, pie-charts, and various other pictorial means.
+
+\end{itemize}
+
+}
+
+\bfr{Some Education Management Systems}{
+
+\begin{itemize}
+
+	\item Byju's also provides interactive videos and tests, which has helped it reach the position of the best Education Management System in India.
+
+	\item Unacademy offers a variety of online courses, which the students can complete at their own pace, and, at the same time, have their doubts cleared by teachers.
+
+	\item As far as innovations go, Doubtnut offers a very useful feature : students can directly scan their question from a camera or an image, and the software automatically finds a solution from their database. 
+
+	\item Perhaps the best one out there, Khanacademy is an Education Management System that has received widespread acclaim internationally, and provides structured and lucid recordings that ensure concept clarity. The advent of Khanacademy is widely believed to have revolutionized education in several countries.
+
+\end{itemize}
+
+}
+
+\bfr{What an EMS does}{
+
+\begin{itemize}
+
+	\item To summarise, these popular EMS's provide the ability to download lots of online resources such as textbooks, solutions, notes, solved question papers, reference books, video lectures, etc..
+
+	\item They also provide students with a detailed analysis of their progress through various courses and tests.
+
+	\item They also provide a platform where students and teachers can discuss about any topic.
+
+\end{itemize}
+
+}
+
+\bfr{What else can an EMS do?}{
+Education Management Systems are very much a developing field, and new features are being experimented with constantly. Here are some of our suggestions :
+    	\begin{itemize}
+       		\item EMS's are typically hosted on the internet, with the assumption that all those who could benefit from it also have a reliable Internet connection. Providing a comprehensive offline availability will greatly improve coverage.
+        		\item A feedback system, where students can point out errors in the solutions provided by the system, will enhance credibility and trust.
+        		\item The interface between Student and Faculty could always use improvement. A mechanism to redirect doubts asked by a student directly to a specific teacher/professor, who is known to provide correct and lucid answers or with whom the student has a rapport, will be useful.
+        	\end{itemize}
+        }
+        
+\bfr{}{
+        \begin{itemize}
+        
+        		\item Every EMS relies on the premise of different students learning at different paces. There seems to be no mention of students preferring different \textit{methods} of learning. An EMS can provide both batch-wise learning, where one enhances one's intellect not only through one's teacher but also one's peers, and course-wise learning, where a student has greater freedom to choose what he / she wants to learn, and in which order. Other methods probably exist.
+		
+        		\item A feature for students/parents to see a teachers qualification in teachers' can be added.
+		
+    	\end{itemize}
+        
+}
+        
+	
+	\bfr{Salient points}{
+	\begin{itemize}
+		\item An EMS must model the interaction between a set of students (in the mathematical sense) and a set of teachers. 
+		\item Each set must be able to exchange information in specific formats (e.g. Assignments, Recordings, Grading), on specific forums.
+		\item It must also allow for mutability of the aforementioned sets, and must acquire data effectively for new-joinees.
+		\item A username-password database is also necessary. 
+		\item The scholastic structure, with Faculty and Students organised into multiple schools and multiple branches per school, is optional. It may simply complicate matters.
+		\item Courses are classified by field, subfield, then complexity. Each Course has member Sessions, Assignments, and Tests. 
+	\end{itemize}
+	}
+	
+	
+	
+	\bfr{Use Cases}{
+	
+		\begin{block}{Faculty}
+		\begin{itemize}
+		\item Uploads video session.
+		\item Uploads assignment question.
+		\item Uploads test question paper and answer paper (separately).
+		\item Evaluate both Tests and Assignments.
+		\end{itemize}
+		\end{block}
+		
+		\begin{block}{Student}
+		\begin{itemize}
+		\item Watch video session.
+		\item Uploads answer to assignment.
+		\item Take tests.
+		\item Ask doubts.
+		\end{itemize}
+		\end{block}
+		
+			}
+	
+	\bfr{Forums}{
+	
+	For this project, a forum is a platform that facilitates a specific type of interaction between Faculty and Student. Each corresponding pair of Use-cases will also correspond to a specific forum.
+	
+	Thus, there will be a single forum for the submission and evaluation of assignments, and a separate one for taking tests. There will also be a forum for doubts/clarifications, with various parameters serving to categorize them for effective handling.
+	
+	A user can log in to a forum, and access/modify specific fields (grading, etc.) and can also upload/download data.
+		}
+		
+	\bfr{Possible Classes}{
+	
+	\begin{itemize}
+		
+		\item class Faculty
+		\item class Student
+		\item class Course
+		\item class Forum : Various forums will be subclasses.
+		\item class Assignment, class Test, class Session, etc. : Tentative.
+		
+	\end{itemize}
+	}	
+	
+	
+	
+	
+	
+\end{document}
