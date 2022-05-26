@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Inbuilt themes in beamer
+\documentclass{beamer}
+
+% Theme choice:
+\usetheme{CambridgeUS}
+
+% Title page details: 
+
+
+\begin{document}
+\newcommand{\bfr}[2]{\section{#1} \begin{frame}{#1} #2 \end{frame}}
+
+	\title{User stories for SDF}
+		\author{ Team 8 (probably)}
+
+	\begin{frame}
+    		\titlepage 
+	\end{frame}
+
+\newcommand{\story}[3]{\bfr{}{\begin{block}{As a } #1 \end{block} \begin{block}{I want to} #2 \end{block} \begin{block}{Purpose} #3 \end{block}}}
+
+\story{Student}
+{Change my password}
+{Secure my account}
+		
+\story{Student}
+{Take a test}
+{know my strengths and weaknesses}
+
+\story{Faculty}
+{View student performance($\sim$)}
+{\begin{enumerate} 
+	\item devise a better learning model
+\end{enumerate}	
+}
+
+\story{Student}
+{Ask doubts}
+{obtain clarity on a topic}
+
+\story{Student}
+{Submit assignments}
+{Get feedback on S\&W}
+
+\story{Student}
+{View available courses}
+{choose a course to take}
+
+\story{Faculty}
+{Record/Upload sessions}
+{provide course material}
+
+\story{Student}
+{View a recorded session}
+{learn stuff}
+
+\story{Student}
+{Access library}
+{Browse available material}
+
+\story{Student}
+{Download recordings, and access archived vids}
+{learn stuff}
+
+\story{Faculty}
+{Attach notes to each session}
+{Normalized learning}
+
+\story{Faculty}
+{Create assignments}
+{Evaluate progress}
+
+\story{Faculty}
+{Conduct live sessions}
+{Interact}
+
+\story{Faculty}
+{Prescribe material for study}
+{.}
+
+\story{Faculty}
+{Maintain repository of previous students' assignments, answer papers, etc.}
+{Analyse student reaction to subject}
+
+\story{Faculty}
+{Schedule sessions}
+{take class}
+
+\story{Student}
+{Access personalised academic calendar}
+{Organize studies}
+
+\story{Student}
+{Add or drop a course}
+{.}
+
+\story{Student}
+{View and verify solutions to tests}
+{ensure veracity of evaluation}
+
+\story{Faculty}
+{Give student marks}
+{NA}
+
+\story{Faculty}
+{Give student grades}
+{Pass/Fail students}
+
+\story{Student}
+{Login}
+{login}
+
+\story{Faculty}
+{Login}
+{login}
+
+\story{Student}
+{Maintain repository of relevant information a.k.a. Cache}
+{Access frequently used information quickly}
+
+\story{Faculty}
+{Conduct 1-1 sessions with particular students}
+{Remedial/Extra}
+
+\story{Student}
+{Appeal for better grade}
+{}
+
+							
+\end{document}
+	
+	
+
+	
+	
+	
+	
