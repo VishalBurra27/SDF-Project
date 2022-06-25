@@ -1,11 +1,15 @@
 import { useState } from "react";
 import React from "react";
+import axios from 'axios';
+
 
 const LoginPage = () => {
     const [contact, setContact] = useState({
         uname:"",
         pwrd:""
     });
+
+    const [valid, setValid] = useState(false);
     
     function updateContact(event){
         event.preventDefault();
@@ -16,10 +20,11 @@ const LoginPage = () => {
         )
     }
 
-    function Auth(e){
+    const Auth = async (e) => {
         e.preventDefault();
-        const res = await https.get('localhost:5001');
-        res.match(contact);
+        const res = await axios.get('localhost:5001');
+        const authorization = res.match(contact);
+        return authorization;
     }
 
     const Link = "/" + contact.uname + "/Dash"
@@ -29,9 +34,16 @@ const LoginPage = () => {
             <form>
                 <h1> Hello, {contact.uname}. </h1>
                 <input name="uname" onChange={updateContact} placeholder="Username." />
-                <input name="pass" value='*' placeholder="Password" />
+                <input type="password" name="pass" placeholder="Password" />
                 
-                <button onClick={e => Auth(e)}><a href={Link}>Login.</a></button>
+                <button onClick={e => {
+                    e.preventDefault(); 
+                setValid(async () => {
+                        const res = await axios.get('localhost:5001');
+                        const authorization = res.match(contact);
+                        return authorization;
+                        });
+                    }}><a href={Link}>Login.</a></button>
             </form>
         </div>
     );
