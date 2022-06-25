@@ -20,13 +20,6 @@ const LoginPage = () => {
         )
     }
 
-    const Auth = async (e) => {
-        e.preventDefault();
-        const res = await axios.get('localhost:5001');
-        const authorization = res.match(contact);
-        return authorization;
-    }
-
     const Link = "/" + contact.uname + "/Dash"
 
     return(
@@ -39,7 +32,7 @@ const LoginPage = () => {
                 <button onClick={e => {
                     e.preventDefault(); 
                 setValid(async () => {
-                        const res = await axios.get('localhost:5001');
+                        const res = await axios.get('localhost:5001/users');
                         const authorization = res.match(contact);
                         return authorization;
                         });

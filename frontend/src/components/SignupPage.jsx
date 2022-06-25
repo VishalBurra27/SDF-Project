@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import React from "react";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
     const [contact, setContact] = useState({
@@ -8,6 +10,9 @@ const SignupPage = () => {
         lname:"",
         email:""
     });
+
+    const [password, setPassword] = useState('');
+    const history = useNavigate();
     
     function updateContact(event){
         event.preventDefault();
@@ -18,7 +23,14 @@ const SignupPage = () => {
         )
     }
 
-    
+    const saveProduct = async (e) => {
+        e.preventDefault();
+        await axios.post('localhost:5001/users', {
+            contact: contact,
+            password: password
+        });
+        history.push("/");
+    }
 
     return(
         <div>
@@ -27,8 +39,9 @@ const SignupPage = () => {
                 <input name="fname" onChange={updateContact} placeholder="First Name." />
                 <input name="lname" onChange={updateContact} placeholder="Last name." />
                 <input name="email" onChange={updateContact} placeholder="Email." />
+                <input name="pwrd" onChange={(e) => setPassword(prev => e.target.value)} type="password"/>
 
-                <button onClick={e => {e.preventDefault(); console.log("Password generated.")}}>Submit.</button>
+                <button onClick={e => {e.preventDefault(); saveProduct(e);} }>Submit.</button>
             </form>
         </div>
     );
