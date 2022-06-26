@@ -5,11 +5,11 @@ import axios from 'axios';
 
 const LoginPage = () => {
     const [contact, setContact] = useState({
-        uname:"",
+        email:"",
         pwrd:""
     });
 
-    const [valid, setValid] = useState(false);
+    // const [valid, setValid] = useState(false);
     
     function updateContact(event){
         event.preventDefault();
@@ -20,23 +20,19 @@ const LoginPage = () => {
         )
     }
 
-    const Link = "/" + contact.uname + "/Dash"
+    
 
     return(
         <div>
             <form>
                 <h1> Hello, {contact.uname}. </h1>
-                <input name="uname" onChange={updateContact} placeholder="Username." />
+                <input name="email" onChange={updateContact} placeholder="Email ID." />
                 <input type="password" name="pass" placeholder="Password" />
                 
                 <button onClick={e => {
                     e.preventDefault(); 
-                setValid(async () => {
-                        const res = await axios.get('localhost:5001/users');
-                        const authorization = res.match(contact);
-                        return authorization;
-                        });
-                    }}><a href={Link}>Login.</a></button>
+                    axios.post('localhost:5001/login');
+                    }}>Login.</button>
             </form>
         </div>
     );

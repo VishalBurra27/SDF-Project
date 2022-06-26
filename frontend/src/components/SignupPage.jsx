@@ -25,7 +25,7 @@ const SignupPage = () => {
 
     const saveProduct = async (e) => {
         e.preventDefault();
-        await axios.post('localhost:5001/users', {
+        await axios.post('localhost:5001/', {
             contact: contact,
             password: password
         });
