@@ -4,20 +4,19 @@ import axios from 'axios';
 
 
 const LoginPage = () => {
-    const [contact, setContact] = useState({
+    const [ID, setID] = useState({
         email:"",
-        pwrd:""
+        password:""
     });
 
     // const [valid, setValid] = useState(false);
     
-    function updateContact(event){
+    function updateID(event){
         event.preventDefault();
         const val = event.target.value;
         const n = event.target.name;
 
-        setContact(prev => ({...prev, [n]:val})
-        )
+        setID(prev => ({...prev, [n]:val}))
     }
 
     
@@ -25,14 +24,17 @@ const LoginPage = () => {
     return(
         <div>
             <form>
-                <h1> Hello, {contact.uname}. </h1>
-                <input name="email" onChange={updateContact} placeholder="Email ID." />
-                <input type="password" name="pass" placeholder="Password" />
+                <h1> Hello, {ID.uname}. </h1>
+                <input name="email" onChange={updateID} placeholder="Email ID." />
+                <input type="password" onChange={updateID} name="password" placeholder="Password" />
                 
-                <button onClick={e => {
-                    e.preventDefault(); 
-                    axios.post('localhost:5001/login');
-                    }}>Login.</button>
+                <button onClick={console.log(ID)
+                    //e => {
+                    //e.preventDefault(); 
+                    //axios.post('localhost:5001/login');
+                    //}
+                }
+                ><a href="/Dash/-1">Login.</a></button>
             </form>
         </div>
     );

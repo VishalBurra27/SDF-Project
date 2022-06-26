@@ -1,6 +1,8 @@
 
 const CourseList = (params) => {
-    return(<h1>CourseList</h1>)
+    return(<div>
+        <h1>These be courses.</h1>
+    </div>)
 }
 
 export default CourseList;

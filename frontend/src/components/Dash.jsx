@@ -15,7 +15,7 @@ const Dashboard = () => {
     const { id } = useParams();
     return(<div>
         <nav><a href="/">Logout</a></nav>
-        {/* <CourseList user={id}/> */}
+        <CourseList user={id}/>
         <h1>Yoohoo.</h1>
     </div>)
 }
