@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 
 const LoginPage = () => {
@@ -8,6 +9,7 @@ const LoginPage = () => {
         email:"",
         password:""
     });
+    const { role } = useParams();
 
     // const [valid, setValid] = useState(false);
     
@@ -18,8 +20,13 @@ const LoginPage = () => {
 
         setID(prev => ({...prev, [n]:val}))
     }
+    var Link = "";
 
-    
+    if(role==1)
+    {Link = "/StudentDash/"}
+    else{Link = "/FacultyDash/"}
+
+    console.log(Link)
 
     return(
         <div>
@@ -34,7 +41,7 @@ const LoginPage = () => {
                     //axios.post('localhost:5001/login');
                     //}
                 }
-                ><a href="/Dash/-1">Login.</a></button>
+                ><a href={Link + "-1"}>Login.</a></button>
             </form>
         </div>
     );

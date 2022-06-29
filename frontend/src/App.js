@@ -11,9 +11,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/Dash/:id" element={<Dashboard />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/StudentDash/:id" element={<Dashboard />} />
+          {/* <Route path="/InstructorDash/:id" element={<IDashboard />} /> */}
+          <Route path="/login/:role" element={<LoginPage />} />
+          <Route path="/signup/:role" element={<SignupPage />} />
         </Routes>
       </Router>
   );

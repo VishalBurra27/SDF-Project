@@ -9,7 +9,7 @@ const Dashboard = () => {
     // }, []);
 
     // const getProductById = async () => {
-    //     const response = await axios.get(`localhost:5001/users/${id}`);
+    //     const response = await axios.get(`localhost:5000/users/${id}`);
     // }
 
     const { id } = useParams();
