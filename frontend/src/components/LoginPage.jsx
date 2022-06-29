@@ -86,7 +86,7 @@ console.log(Link)
                 
                 
                 <p>Don't have an account?</p>
-                <a href="/signup">
+                <a href={"/signup/" + role}>
                   <button type="button" className="btn btn-info" >Signup</button>
                 </a>
               </div>

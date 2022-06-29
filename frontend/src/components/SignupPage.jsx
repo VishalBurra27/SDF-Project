@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import React from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link, Route, Router, Routes, useNavigate } from 'react-router-dom';
 import "./SignupPage.css"
@@ -33,6 +34,7 @@ const SignupPage = () => {
     //     history.push("/");
     // }
 
+      const { role } = useParams();
     return(
         
 <section className="text-center text-lg-start">
@@ -93,7 +95,7 @@ const SignupPage = () => {
               </div>
               <div className="login">
                 <p>Already have an account?</p>
-                <a href="/login">
+                <a href={"/login/" + role}>
                   <button type="button" className="btn btn-info" >Login</button>
                 </a>
                 
