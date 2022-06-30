@@ -10,7 +10,7 @@ function App() {
   return (
       <Router>
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route exact path="/" element={<Homepage />} />
           <Route path="/StudentDash/:id" element={<Dashboard />} />
           {/* <Route path="/InstructorDash/:id" element={<IDashboard />} /> */}
           <Route path="/login/:role" element={<LoginPage />} />

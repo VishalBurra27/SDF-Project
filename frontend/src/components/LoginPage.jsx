@@ -25,7 +25,7 @@ var Link = "";
 
 if(role==1)
 {Link = "/StudentDash/"}
-else{Link = "/FacultyDash/"}
+else{Link = "/InstructorDash/"}
 
 console.log(Link)
 
@@ -49,7 +49,7 @@ console.log(Link)
 
               <div className="form-outline mb-4">
                 <input name="email" onChange={updateID} placeholder="eg : abc123@gmail.com" type="email" id="form3Example3" className="form-control"/>
-                <label className="form-label" htmlFor="form3Example3">Email address</label>
+                <label className="form-label" htmlFor="form3Example3">Username</label>
               </div>
 
               <div className="form-outline mb-4">

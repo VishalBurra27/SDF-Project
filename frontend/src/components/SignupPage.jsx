@@ -7,6 +7,13 @@ import { Link, Route, Router, Routes, useNavigate } from 'react-router-dom';
 import "./SignupPage.css"
 
 const SignupPage = () => {
+  
+    const [newUser, makeNewUser] = useState({
+      name:String,
+      username:String,
+      email:String,
+      password:String
+    })
     // const [contact, setContact] = useState({
     //     fname:"",
     //     lname:"",
@@ -34,7 +41,20 @@ const SignupPage = () => {
     //     history.push("/");
     // }
 
+    const addInfo = (e) => {
+      const val = e.target.value;
+      const n = e.target.name;
+      makeNewUser(prev => {
+        return{
+          ...prev,
+          [n]: val
+        }
+      });
+    }
+
       const { role } = useParams();
+      const Link = role == 1? "/StudentDash/" : "/InstructorDash/";
+      console.log(Link)
     return(
         
 <section className="text-center text-lg-start">
@@ -54,33 +74,33 @@ const SignupPage = () => {
               <div className="row">
                 <div className="col-md-6 mb-4">
                   <div className="form-outline">
-                    <input type="text" id="form3Example1" className="form-control" />
-                    <label className="form-label" htmlFor="form3Example1">First name</label>
-                  </div>
-                </div>
-                <div className="col-md-6 mb-4">
-                  <div className="form-outline">
-                    <input type="text" id="form3Example2" className="form-control" />
-                    <label className="form-label" htmlFor="form3Example2">Last name</label>
+                    <input name="name" type="text" onChange={e => addInfo(e)} id="form3Example1" className="form-control" />
+                    <label className="form-label" htmlFor="form3Example1">Full name</label>
                   </div>
                 </div>
               </div>
 
               <div className="form-outline mb-4">
-                <input type="email" id="form3Example3" className="form-control" />
-                <label className="form-label" htmlFor="form3Example3">Email address</label>
+                <input type="email" name="email" onChange={e => addInfo(e)} id="form3Example2" className="form-control" />
+                <label className="form-label" htmlFor="form3Example2">Email address</label>
               </div>
 
               <div className="form-outline mb-4">
-                <input type="password" id="form3Example4" className="form-control" />
+                <input type="text" name="username" onChange={e => addInfo(e)} id="form3Example3" className="form-control" />
+                <label className="form-label" htmlFor="form3Example3">Username</label>
+              </div>
+
+              <div className="form-outline mb-4">
+                <input type="password" name="password" onChange={e => addInfo(e)} id="form3Example4" className="form-control" />
                 <label className="form-label" htmlFor="form3Example4">Password</label>
               </div>
 
               
-
-              <button type="submit" className="btn btn-info btn-block mb-4">
+            <a href={Link + "-1"}>
+              <button type="button" onClick={console.log(newUser)} className="btn btn-info btn-block mb-4">
                 Sign up
               </button>
+              </a>
 
 
               <div className="text-center">
