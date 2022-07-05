@@ -48,6 +48,7 @@ const Login = () => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
+          // The /courses will take to the course list.
           navigate("/profile");
           window.location.reload();
         },

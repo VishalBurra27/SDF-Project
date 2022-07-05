@@ -20,6 +20,9 @@ exports.signup = (req, res) => {
       res.status(500).send({ message: err });
       return;
     }
+    else{
+      res.send({ message: "User was registered successfully!" });
+    }
 
     // if (req.body.roles) {
     //   Role.find(
@@ -103,6 +106,7 @@ exports.signin = (req, res) => {
       // for (let i = 0; i < user.roles.length; i++) {
       //   authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       // }
+      
       res.status(200).send({
         id: user._id,
         name:user.name,

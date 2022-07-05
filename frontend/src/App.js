@@ -12,6 +12,9 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import CoursesList from "./components/CoursesList";
+import AddCourse from "./components/AddCourse";
+import Course from "./components/Course";
 
 import EventBus from "./common/EventBus";
 
@@ -82,12 +85,42 @@ const App = () => {
               </Link>
             </li>
           )}
+
+          {/* {currentUser && (
+            <li className="nav-item">
+              <Link to={"/courses"} className="nav-link">
+                User
+              </Link>
+            </li>
+          )} */}
+
+          {currentUser && currentUser.authority === "Instructor" && (
+            <li className="nav-item">
+              <Link to={"/courses"} className="nav-link">
+                Courses
+              </Link>
+            </li>
+          )
+          }
+
+          {currentUser && currentUser.authority === "Student" && (
+            <li className="nav-item">
+              <Link to={"/courses"} className="nav-link">
+                Courses
+              </Link>
+            </li>
+          )
+          }
+
+          
+
         </div>
 
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
+            {/* Change /courses to /profile */}
+              <Link to={"/profile"} className="nav-link"> 
                 {currentUser.username}
               </Link>
             </li>
@@ -122,6 +155,9 @@ const App = () => {
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/user" element={<BoardUser/>} />
+          <Route path="/courses" element={<CoursesList/>} />
+          <Route path="/courses/add" element={<AddCourse/>} />
+          <Route path="/courses/:id" element={<Course/>} />
           {/* <Route path="/mod" element={<BoardModerator/>} />
           <Route path="/admin" element={<BoardAdmin/>} /> */}
         </Routes>
