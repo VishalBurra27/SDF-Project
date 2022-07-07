@@ -142,3 +142,20 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
+
+// exports.findMine = (req, res) => {
+//   const username = req.params.username;
+//   const currentUser = User.findOne({username : username});
+
+//   {currentUser.authority }
+//   Course.find({})
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving courses."
+//       });
+//     });
+// }

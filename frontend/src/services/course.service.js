@@ -1,9 +1,13 @@
 import axios from "axios";
+import AuthService from "./auth.service";
 
 const API_URL = "http://localhost:5000/api";
+const user = AuthService.getCurrentUser();
 
 const getAllCourses = () => {
-  return axios.get(API_URL + "/courses");
+  const response = axios.get(API_URL + "/courses");
+  console.log(response);
+  return response;
 };
 
 const getCourseByID = id => {
@@ -37,7 +41,8 @@ const CourseService = {
   updateCourse,
   removeCourse,
   removeAllCourses,
-  getCourseByTitle
+  getCourseByTitle,
+
 };
 
 export default CourseService;

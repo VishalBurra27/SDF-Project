@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CourseService from "../services/course.service";
 import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import SubService from "../services/subs.service";
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
@@ -9,11 +10,37 @@ const CoursesList = () => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  const [viewAll, setViewAll] = useState(false);
+  const [subs, setSubs] = useState([]);
+ // const [currentSub, setCurrentSub] = useState();
 
   useEffect(() => {
     retrieveCourses();
+    retrieveSubs();
   }, []);
 
+  //We need to add functionality to alternatively display "Subscribe" or "Unsubscribe" in each course 
+  // based on the value of "subs"
+
+  const retrieveSubs = () => {
+    SubService.getAllSubs()
+    .then(response => {
+      setSubs(response.data.filter((sub) => sub.user_id === currentUser.username));
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
+  const checkSub = (course) => {
+    const list = subs.filter((sub) => sub.course_id === course.title);
+    if(list.length === 0){
+      return false;
+    }
+    else return true;
+  }
+ 
   const navigate = useNavigate();
 
   const onChangeSearchTitle = e => {
@@ -41,6 +68,9 @@ const CoursesList = () => {
   const setActiveCourse = (course, index) => {
     setCurrentCourse(course);
     setCurrentIndex(index);
+    console.log(currentCourse);
+    console.log(currentIndex);
+    //setCurrentSub(() => subs.find((sub) => {sub.course_id === course.title}))
   };
 
   const removeAllCourses = () => {
@@ -71,6 +101,7 @@ const CoursesList = () => {
 
   return (
     <div className="list row">
+      {/*This is the search bar*/}
       <div className="col-md-8">
         <div className="input-group mb-3">
           <input
@@ -90,13 +121,23 @@ const CoursesList = () => {
             </button>
           </div>
         </div>
+        <button
+          className="m-3 btn btn-sm btn-success"
+          onClick={() => setViewAll(true)}
+        >
+          View All Courses
+      </button>
       </div>
-      <div className="col-md-6">
-        <h4>Courses List</h4>
+
+      {/* This is the instructor portion */}
+      {currentUser.authority === "Instructor" && (<div>
+        {!viewAll && (
+        <div className="col-md-8">
+        <h4>My Courses</h4>
 
         <ul className="list-group">
-          {courses &&
-            courses.map((course, index) => (
+          {courses && 
+            courses.filter((course) => course.instructor === currentUser.username).map((course, index) => (
               <li
                 className={
                   "list-group-item " + (index === currentIndex ? "active" : "")
@@ -104,17 +145,17 @@ const CoursesList = () => {
                 onClick={() => setActiveCourse(course, index)}
                 key={index}
               >
-                {course.title}
+                {course.title} : {course.description} : {course.instructor}
               </li>
             ))}
         </ul>
 
-        <button
+        {/* <button
           className="m-3 btn btn-sm btn-danger"
           onClick={removeAllCourses}
         >
           Remove All
-        </button>
+        </button> */}
 
         {currentUser.authority === "Instructor" && (<button
           className="m-3 btn btn-sm btn-success"
@@ -124,7 +165,8 @@ const CoursesList = () => {
         </button>)}
 
       </div>
-      <div className="col-md-6">
+)}
+      {!viewAll && (<div className="col-md-5">
         {currentCourse ? (
           <div>
             <h4>Course</h4>
@@ -157,7 +199,7 @@ const CoursesList = () => {
               to={"/courses/" + currentCourse.id}
               className="badge badge-warning"
             >
-              Edit
+              Show detail
             </Link>
           </div>
         ) : (
@@ -166,7 +208,180 @@ const CoursesList = () => {
             <p>Please click on a Course...</p>
           </div>
         )}
+
+      </div>)}
+      {viewAll && (<div className="col-md-7">
+        <h4>Courses List</h4>
+
+        <ul className="list-group">
+          {courses &&
+            courses.map((course, index) => (
+              <li
+                className={
+                  "list-group-item "
+                  //  + (index === currentIndex ? "active" : "")
+                }
+                // onClick={() => setActiveCourse(course, index)}
+                // key={index}
+              >
+                {course.title} : {course.description} : {course.instructor}
+              </li>
+            ))}
+        </ul>
+
+        <button
+          className="m-3 btn btn-sm btn-success"
+          onClick={() => setViewAll(false)}
+        >
+          Show my courses only
+        </button>
+
+        {/* <button
+          className="m-3 btn btn-sm btn-danger"
+          onClick={removeAllCourses}
+        >
+          Remove All
+        </button>
+
+        {currentUser.authority === "Instructor" && (<button
+          className="m-3 btn btn-sm btn-success"
+          onClick={addCourse}
+        >
+          Add Course
+        </button>)} */}
+
+      </div>)}
+      </div>)
+      }
+
+      {/* This is the student portion */}
+      {currentUser.authority === "Student" && (<div>
+        {!viewAll && (
+          <div className="col-md-8">
+            <h4>My Courses</h4>
+
+        <ul className="list-group">
+          {courses && 
+            courses.filter((course) => checkSub(course)).map((course, index) => (
+              <li
+                className={
+                  "list-group-item "
+                   + (index === currentIndex ? "active" : "")
+                }
+                onClick={() => setActiveCourse(course, index)}
+                key={index}
+              >
+                {course.title} : {course.description} : {course.instructor}
+              </li>
+            ))
+            }
+            {/* {courses &&
+            courses.map((course, index) => (
+              <li
+                className={
+                  "list-group-item "
+                   + (index === currentIndex ? "active" : "")
+                }
+                onClick={() => setActiveCourse(course, index)}
+                key={index}
+              >
+                {course.title} : {course.description} : {course.instructor}
+              </li>
+            ))} */}
+        </ul>
+
+        {/* <button
+          className="m-3 btn btn-sm btn-danger"
+          onClick={removeAllCourses}
+        >
+          Remove All
+        </button> */}
+
       </div>
+        )}
+
+        {viewAll && (
+      <div className="col-md-7">
+        <h4>Courses List</h4>
+          
+        <ul className="list-group">
+          {courses &&
+            courses.map((course, index) => (
+              <li
+                className={
+                  "list-group-item "
+                   + (index === currentIndex ? "active" : "")
+                }
+                onClick={() => {setActiveCourse(course, index);
+                          console.log(currentIndex);}}
+                key={index}
+              >
+                {course.title} : {course.description} : {course.instructor}
+              </li>
+            ))}
+        </ul>
+
+        <button
+          className="m-3 btn btn-sm btn-success"
+          onClick={() => setViewAll(false)}
+        >
+          Show my courses only
+        </button>
+
+      </div>)}
+
+      <div className="col-md-6">
+        {currentCourse ? (
+          <div>
+          {console.log("In the individual course.")}
+            {/* <h4>Course</h4>
+            <div>
+              <label>
+                <strong>Title:</strong>
+              </label>{" "}
+              {currentCourse.title}
+            </div>
+            <div>
+              <label>
+                <strong>Description:</strong>
+              </label>{" "}
+              {currentCourse.description}
+            </div>
+            <div>
+              <label>
+                <strong>Instructor:</strong>
+              </label>{" "}
+              {currentCourse.instructor}
+            </div>
+            <div>
+              <label>
+                <strong>Score:</strong>
+              </label>{" "}
+
+              {console.log("Hello.")}
+
+            </div> */}
+
+            <Link
+              to={"/courses/" + currentCourse.id}
+              className="badge badge-warning"
+            >
+              Show Detail
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <br />
+            <p>Please click on a Course...</p>
+          </div>
+        )}
+
+      </div>
+
+
+      </div>)
+      }
+
     </div>
   );
 };
