@@ -24,13 +24,35 @@ const Course = props => {
   }
   
   const [currentCourse, setCurrentCourse] = useState(id ? CourseDataService.getCourseByID(id) : initialCourseState);
-  console.log(currentCourse);
+  // console.log(currentCourse);
   const [message, setMessage] = useState("");
   const [currentUser, setcurrentUser] = useState(AuthService.getCurrentUser());
   const [sub, updateSub] = useState(false);
-  const [currentSub, setCurrentSub] = useState(currentUser.username && currentCourse.title ? SubService.getUserSubByID(currentUser.username, currentCourse.title) : initialSubState);
+  const [currentSub, setCurrentSub] = useState(currentUser.username && currentCourse.title ? SubService.getUserSubByID(currentUser.username, currentCourse.title)
+  // .then(response => {
+  //   // console.log(currentUser.username);
+  //   // console.log(currentCourse !== undefined? currentCourse.id : "Barthilla.");
+  //   setCurrentSub(response.data[0]);
+  //   updateSub(response.data.length > 0)
+  //   // console.log(currentSub.score);
+  // })
+  // .catch(e => {
+  //   console.log(e);
+  // }) 
+  : initialSubState);
   const [students, setStudents] = useState([])
-  const [currentStudentIndex, setStudentIndex] = useState(-1)
+  const [currentStudentIndex, setStudentIndex] = useState(-1);
+  // const [grade, setGrade] = useState({
+  //   score : "",
+  //   grade : ""
+  // });
+
+  // const [currentStudent, setCurrentStudent] = useState(initialSubState);
+
+  const [result, setResult] = useState({
+    score:"",
+    grade:""
+  });
 
   const subscribe = () => {
     SubService.createSub({
@@ -56,18 +78,21 @@ const Course = props => {
     });
   }
 
-  const getSub = () => {
-    SubService.getUserSubByID(currentUser.username, currentCourse.title)
+  const getSub = async () => {
+    await SubService.getUserSubByID(currentUser.username, currentCourse.title)
     .then(response => {
       console.log(currentUser.username);
-      console.log(currentCourse ? currentCourse.id : "Barthilla.");
+      // console.log(currentCourse !== undefined? currentCourse.id : "Barthilla.");
       setCurrentSub(response.data[0]);
-      updateSub(response.data.length > 0)
+      console.log(response.data);
+      updateSub(response.data.length > 0);
       console.log(currentSub.score);
     })
     .catch(e => {
       console.log(e);
     });
+
+
   }
 
   const getCourse = id => {
@@ -85,8 +110,13 @@ const Course = props => {
     if (id)
       getCourse(id);
 
-    getSub();
+    
   }, [id]);
+
+  // useEffect(() => {
+  //   let ignore = false;
+  //   setTimeout(() => {if(!ignore){getSub();}}, 10)
+  //  return () => ignore = true}, [])
 
   const handleInputChange = event => {
     getSub();
@@ -127,10 +157,17 @@ const Course = props => {
       });
   };
 
-  const handleGrading = event => {
-    event.preventDefault();
-    console.log("This isn't working.");
-  }
+//   const handleEval = (e) => {
+//     getStudents();
+//     console.log(currentStudent);
+//     const { name, value } = e.target;
+//     setCurrentStudent({ user_id: students[currentStudentIndex].username, course_id: currentCourse.title, [name]: value });
+// }
+
+//   const handleGrading = (event) => {
+//     event.preventDefault();
+//     SubService.gradeStudent(currentStudent._id, {score: currentStudent.score, grade : currentStudent.grade})
+//   }
 
   const deleteCourse = () => {
     CourseDataService.removeCourse(currentCourse.id)
@@ -152,8 +189,26 @@ const Course = props => {
     console.log(students);
   }
 
+  const handleEval = async (e, student) => {
+    const user_id = student.user_id;
+    const course_id = student.course_id;
+    const {score, grade} = result;
+    await SubService.gradeStudent(student._id, {user_id:user_id, course_id:course_id, score:score, grade:grade})
+    .then(response => {
+      console.log(response.data);
+      setMessage("Graded.");
+    })
+    .catch(e => {
+      console.log(e);
+    });
+    }
   return (
     <div>
+    {/* {useEffect(() => {
+      let ignore = false;
+      setTimeout(() => {if(!ignore){getSub();}}, 10)
+      return () => ignore = true}, [])} */}
+
       {currentCourse ? (
         <div className="edit-form">
           {/* {console.log(currentCourse.id)} */}
@@ -194,14 +249,14 @@ const Course = props => {
               />
             </div>
 
-            {currentUser.authority === "Instructor" && (<div className="form-group">
+            {/* {currentUser.authority === "Instructor" && (<div className="form-group">
               <label>
                 <strong>Status:</strong>
               </label>
-              {currentCourse.published ? "Published" : "Pending"}
-            </div>)}
+              {currentCourse.published ? "Published" : "Pending"} 
+            </div>)}*/}
 
-            {currentSub && (<div>
+            {sub && (<div>
             {currentUser.authority === "Student" && (
               <div>
               <label htmlFor="score">Score</label>
@@ -230,9 +285,9 @@ const Course = props => {
             )}
             </div>)}
           </form>
-
+{/* instructor buttons */}
           {currentUser.authority === "Instructor" && (<div>
-          {currentCourse.published ? (
+          {/* {currentCourse.published ? (
             <button
               className="badge badge-primary mr-2"
               onClick={() => updatePublished(false)}
@@ -246,22 +301,23 @@ const Course = props => {
             >
               Publish
             </button>
-          )}
+          )} */}
 
-          <button className="badge badge-danger mr-2" onClick={deleteCourse}>
+          <button className="btn btn-danger m-2" onClick={deleteCourse}>
             Delete
           </button>
 
           <button
             type="submit"
-            className="badge badge-success mr-2"
+            className="btn btn-success m-2"
             onClick={updateCourse}
           >
             Update
           </button>
+
           {currentCourse && (
             <div>
-          <button className="badge badge-success" onClick={() => getStudents()}>
+          <button className="btn btn-info m-2" onClick={() => getStudents()}>
             Show students
           </button>
             {students.length > 0 && (
@@ -276,34 +332,40 @@ const Course = props => {
                 }
                 onClick={() => setStudentIndex(index)}
                 key={index}>
-                    {student.user_id}
+                    {student.user_id} : {student.score} : {student.grade}
                     
                     {(index === currentStudentIndex) && (<form>
-                    <label htmlFor="studntScore">Score</label>
+                    <label htmlFor="score">Score</label>
                       <input
                       type="text"
                       className="form-control"
-                      id="studentScore"
-                      name="studentScore"
-                      value={student.score}
-                      onChange={handleGrading}
+                      id="score"
+                      name="score"
+                      // value={currentStudent.score}
+                      onChange={(e) => setResult(prev => {
+                        return {...prev, [e.target.name] : e.target.value}})}
                       />
                       <label htmlFor="studentGrade">Grade</label>
                       <input
                       type="text"
                       className="form-control"
-                      id="studestudentGradentScore"
-                      name="studentGrade"
-                      value={student.grade}
-                      onChange={handleGrading}
+                      id="grade"
+                      name="grade"
+                      // value={currentStudent.grade}
+                      onChange={(e) => setResult(prev => {
+                        return {...prev, [e.target.name] : e.target.value}})}
                       />
+
+                      <button className="btn btn-warning m-2"onClick={(e) => handleEval(e, student)}>
+                        Commit grade
+                      </button>
                       
                     </form>)}
 
                   </li>
                 )}
               </ul>
-                <button className="badge" onClick={() => setStudents([])}>
+                <button className="btn btn-info m-2" onClick={() => setStudents([])}>
                   Hide Students
                 </button>
               </div>
@@ -311,21 +373,23 @@ const Course = props => {
             </div>
           )}
             </div>)}
-
+{/* Starting student buttons */}
             {currentUser.authority === "Student" && (<div>
 
-              <button className="badge mr-2" onClick={() => getSub()}>
+              <button className="btn btn-info m-2" onClick={() => getSub()}>
                 View grade
               </button>
-              {!sub ? (
-              <button className="badge mr-2" onClick={() => {subscribe();
+              {!currentSub ? (
+                
+              <button className="btn btn-info m-2" onClick={() => {subscribe();
               navigate('/courses');
               }}>
-                Subscribe
+              Subscribe
               </button>
+              
                ) 
               :
-              (<button className="badge mr-2 badge-danger" onClick={() => {
+              (<button className="btn m-2 btn-danger" onClick={() => {
                   unsubscribe();
                   navigate('/courses');
                   }}>
@@ -333,7 +397,7 @@ const Course = props => {
               </button>)} 
             </div>)}
 
-          <button className="badge badge-danger mr-2" onClick={() => {navigate('/courses')}}>
+          <button className="btn btn-danger m-2" onClick={() => {navigate('/courses')}}>
             Finish
           </button>
           <p>{message}</p>

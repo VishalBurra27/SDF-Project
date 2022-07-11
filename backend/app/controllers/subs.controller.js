@@ -68,3 +68,15 @@ exports.findByCourse = (req, res) => {
     });
   });
 }
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Sub.updateOne({_id : id}, {$set : {score : req.body.score, grade : req.body.grade}})
+  .then(data => res.send(data))
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while updating courses."
+    });
+  });
+}

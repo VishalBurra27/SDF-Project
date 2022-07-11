@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
 
+
 const Home = () => {
   const [content, setContent] = useState("");
 
@@ -24,7 +25,8 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
+        {/* <h3>IIT Home page</h3> */}
+      <img src={process.env.PUBLIC_URL+"logo.png"} className="w-100 rounded-4 shadow-4" />
       </header>
     </div>
   );

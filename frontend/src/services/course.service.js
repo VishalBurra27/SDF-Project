@@ -11,7 +11,8 @@ const getAllCourses = () => {
 };
 
 const getCourseByID = id => {
-  return axios.get(API_URL + `/courses/${id}`);
+  const response = axios.get(API_URL + `/courses/${id}`);
+  return response;
 };
 
 const createCourse = data => {

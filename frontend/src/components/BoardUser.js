@@ -4,7 +4,7 @@ import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
 const BoardUser = () => {
-  const [content, setContent] = useState(""); //Put json objet with number of courses and CGPA
+  const [content, setContent] = useState(""); //Put json object with number of courses and CGPA
 
   useEffect(() => {
     UserService.getUserBoard().then(

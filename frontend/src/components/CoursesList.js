@@ -100,7 +100,7 @@ const CoursesList = () => {
   };
 
   return (
-    <div className="list row">
+    <div >
       {/*This is the search bar*/}
       <div className="col-md-8">
         <div className="input-group mb-3">
@@ -132,7 +132,7 @@ const CoursesList = () => {
       {/* This is the instructor portion */}
       {currentUser.authority === "Instructor" && (<div>
         {!viewAll && (
-        <div className="col-md-8">
+        <div className="col-md-8 row-mr-5">
         <h4>My Courses</h4>
 
         <ul className="list-group">
@@ -233,7 +233,7 @@ const CoursesList = () => {
           className="m-3 btn btn-sm btn-success"
           onClick={() => setViewAll(false)}
         >
-          Show my courses only
+          My courses
         </button>
 
         {/* <button

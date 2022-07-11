@@ -22,7 +22,7 @@ module.exports = app => {
     // router.get("/:id", courses.findOne);
   
     // // Update a Tutorial with id
-    // router.put("/:id", courses.update);
+    router.put("/:id", subs.update);
   
     // // Delete a Tutorial with id
     router.delete("/:id", subs.delete);
