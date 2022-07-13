@@ -1,0 +1,62 @@
+/* Carousel styling */
+#introCarousel,
+            .carousel-inner,
+            .carousel-item,
+            .carousel-item.active {
+              height: 100vh;
+            }
+      
+            .carousel-item:nth-child(1) {
+              background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center center;
+            }
+      
+            .carousel-item:nth-child(2) {
+              background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center center;
+            }
+      
+            .carousel-item:nth-child(3) {
+              background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center center;
+            }
+      
+            /* Height for devices larger than 576px */
+            /* @media (min-width: 992px) {
+              #introCarousel {
+                margin-top: -58.59px;
+              }
+            } */
+      
+            /* .navbar .nav-link {
+              color: #fff !important;
+            } */
+
+
+.masker
+{
+    z-index: 2000;
+}
+
+.mask1{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.mask2{
+    background: linear-gradient(
+                        45deg,
+                        rgba(29, 236, 197, 0.7),
+                        rgba(91, 14, 214, 0.7) 100%
+                      );
+}
+.mask3{
+    background-color: rgba(251, 251, 251, 0.15);
+}
+.mask4{
+    background-color: rgba(0, 0, 0, 0.2);
+}
